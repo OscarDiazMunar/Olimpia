@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Olimpia</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nombre_usuario">Nombre</string>
+    <string name="cedula_usuario">Cedula</string>
+    <string name="dirrecion_usuario">Dirrección</string>
+    <string name="celular_usuario">Celular</string>
+    <string name="btn_siguiente">Siguiente</string>
+    <string name="ciudad_usuario">Ciudad</string>
+    <string name="pais_usuario">Pais</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
