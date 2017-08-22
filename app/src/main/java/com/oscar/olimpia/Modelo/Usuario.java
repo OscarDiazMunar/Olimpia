@@ -14,8 +14,9 @@ public class Usuario implements Serializable {
     private String pais;
     private String ciudad;
     private String coordenadas;
+    private String foto;
 
-    public Usuario(String nombre, String cedula, String dirreccion, String celular, String pais, String ciudad, String coordenadas) {
+    public Usuario(String nombre, String cedula, String dirreccion, String celular, String pais, String ciudad, String coordenadas, String foto) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.dirreccion = dirreccion;
@@ -23,6 +24,7 @@ public class Usuario implements Serializable {
         this.pais = pais;
         this.ciudad = ciudad;
         this.coordenadas = coordenadas;
+        this.foto = foto;
     }
 
     public String getNombre() {
@@ -79,6 +81,14 @@ public class Usuario implements Serializable {
 
     public void setCoordenadas(String coordenadas) {
         this.coordenadas = coordenadas;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override

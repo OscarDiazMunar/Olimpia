@@ -15,4 +15,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="foto_usuario">Foto Usuario</string>
+
+    <string name="message_error">El campo no puede estar vacio</string>
 </resources>

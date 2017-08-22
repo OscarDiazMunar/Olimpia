@@ -1,5 +1,7 @@
 package com.oscar.olimpia;
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.oscar.olimpia.Modelo.Usuario;
+import com.oscar.olimpia.Utils.Constants;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
     private Usuario usuario;
 
+    private Resources res;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        res = getResources();
     }
 
     @Override
@@ -137,6 +143,7 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()){
             case R.id.btnSiguiente:
                 fillDataUsuario();
+
                 break;
             case R.id.txtPais:
                 FragmentManager manager = getSupportFragmentManager();
@@ -152,16 +159,52 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fillDataUsuario() {
-        usuario = new Usuario(txtNombre.getText().toString(),
-                                txtCedula.getText().toString(),
-                                txtDirreccion.getText().toString(),
-                                txtCelular.getText().toString(),
-                                txtPais.getText().toString(),
-                                txtCiudad.getText().toString(),
-                                "hola");
+        if (validateInputs()){
+            usuario = new Usuario(txtNombre.getText().toString(),
+                    txtCedula.getText().toString(),
+                    txtDirreccion.getText().toString(),
+                    txtCelular.getText().toString(),
+                    txtPais.getText().toString(),
+                    txtCiudad.getText().toString(),
+                    "hola",
+                    "hola");
 
-        Log.e("Objeto", usuario.toString());
+            Log.e("Objeto", usuario.toString());
+            Intent intent = new Intent(this,FotoActivity.class);
+            intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
+            startActivity(intent);
+        }
     }
+
+    private boolean validateInputs() {
+        boolean validate = true;
+        if (txtNombre.getText().toString().isEmpty()){
+            txtNombre.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        if(txtCedula.getText().toString().isEmpty()){
+            txtCedula.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        if(txtDirreccion.getText().toString().isEmpty()){
+            txtDirreccion.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        if(txtCelular.getText().toString().isEmpty()){
+            txtCelular.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        if(txtPais.getText().toString().isEmpty()){
+            txtPais.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        if(txtCiudad.getText().toString().isEmpty()){
+            txtCiudad.setError(res.getString(R.string.message_error));
+            validate = false;
+        }
+        return validate;
+    }
+
 
     @Override
     public void onFragmentInteraction(String cadena, boolean isPais) {
