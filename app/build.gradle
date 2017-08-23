@@ -15,6 +15,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "host_guardar", project.property('host_guardar')
+        }
+
+        debug {
+            buildConfigField "String", "host_guardar", project.property('host_guardar')
         }
     }
 }
@@ -25,11 +30,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:cardview-v7:26.+'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.google.android.gms:play-services:9.6.1'
+    compile 'com.android.volley:volley:1.0.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
 }

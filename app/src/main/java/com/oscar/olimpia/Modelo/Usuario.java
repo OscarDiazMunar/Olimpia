@@ -101,6 +101,7 @@ public class Usuario implements Serializable {
                 ", pais='" + pais + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", coordenadas='" + coordenadas + '\'' +
+                ", foto='" + foto + '\'' +
                 '}';
     }
 }

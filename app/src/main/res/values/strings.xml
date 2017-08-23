@@ -18,4 +18,8 @@
     <string name="foto_usuario">Foto Usuario</string>
 
     <string name="message_error">El campo no puede estar vacio</string>
+    <string name="ubicacion_usuario">Tu ubicación</string>
+
+    <string name="google_maps_key">AIzaSyA8l2DjUiKLbemNUBKgWLI2lHeTJU6zM5E</string>
+    <string name="map_buscar">Buscando coordenadas...</string>
 </resources>
