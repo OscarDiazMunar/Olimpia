@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -29,6 +30,8 @@ public class StateWiFiBlueActivity extends AppCompatActivity {
     Button btnSiguiente;
     private BluetoothAdapter bluetoothAdapter;
     private Usuario usuario;
+    private WifiManager wifi;
+    IntentFilter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,11 @@ public class StateWiFiBlueActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         usuario = (Usuario) getIntent().getSerializableExtra(Constants.extraActivity.pojoUsuario);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        registerReceiver(bluetoothReceiver, filter);
+
         activarBluetooth();
+        wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
     }
 
@@ -60,11 +64,44 @@ public class StateWiFiBlueActivity extends AppCompatActivity {
         Log.e("en pause","aqui");
     }
 
-    @OnClick(R.id.btnSiguiente)
-    public void onViewClicked() {
-        Intent intent = new Intent(this, CargarInfoActivity.class);
-        intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
-        startActivity(intent);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(bluetoothReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(bluetoothReceiver);
+    }
+
+    @OnClick({R.id.btnSiguiente, R.id.imgWifi, R.id.imgBluetooth})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.imgWifi:
+
+                if (wifi.isWifiEnabled()){
+                    wifi.setWifiEnabled(false);
+                }else {
+                    wifi.setWifiEnabled(true);
+                }
+                break;
+            case R.id.imgBluetooth:
+                if (bluetoothAdapter.isEnabled()){
+                    bluetoothAdapter.disable();
+                }else {
+                    bluetoothAdapter.enable();
+                }
+                break;
+            case R.id.btnSiguiente:
+                Intent intent = new Intent(this, CargarInfoActivity.class);
+                intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
+                startActivity(intent);
+                break;
+
+        }
+
     }
 
     private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
     tools:context="com.oscar.olimpia.StateWiFiBlueActivity">
 
     <ImageView
@@ -38,7 +39,7 @@
         android:id="@+id/btnSiguiente"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Button"
+        android:text="@string/btn_siguiente"
         android:background="@drawable/degradado"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         android:layout_marginTop="8dp"

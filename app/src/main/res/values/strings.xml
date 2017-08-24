@@ -22,4 +22,18 @@
 
     <string name="google_maps_key">AIzaSyA8l2DjUiKLbemNUBKgWLI2lHeTJU6zM5E</string>
     <string name="map_buscar">Buscando coordenadas...</string>
+    <string name="mensaje_esperarResAlarma">Enviando mensaje de texto</string>
+    <string name="mensaje_esperaTiempo">Se esta enviando el mensaje de texto por favor espere.</string>
+    <string name="mensaje_advertencia">Advertencia</string>
+    <string name="mensajeToast_menEnviado">El mensaje fue enviado</string>
+    <string name="mensajeToast_fallo_envio">El envio fallo</string>
+    <string name="mensajeToast_noServicio">No hay servicio SMS</string>
+    <string name="mensajeToast_noPdu">No hay PDU</string>
+    <string name="mensajeToast_menEntregadoOpe">El mensaje fue entregado al operador</string>
+    <string name="mensajeToast_menNoEntregadoOpe">El emnsaje no se pudo entregar al operador</string>
+    <string name="mensaje_NoConfirma">No confirma</string>
+    <string name="check_sms">Enviar confirmacion por SMS</string>
+    <string name="guardar_datos">Guardar dato en web service</string>
+    <string name="btn_guardar">Guardar datos</string>
+    <string name="mensaje_datosOK">Los datos fueron cargados en la base de datos</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.oscar.olimpia;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -40,8 +42,9 @@ public class FotoActivity extends AppCompatActivity {
     @Bind(R.id.imgFoto)
     ImageView imgFoto;
 
-    private File output = null;
     private Usuario usuario;
+
+    private boolean setPhoto = false;
 
 
 
@@ -67,9 +70,14 @@ public class FotoActivity extends AppCompatActivity {
                 break;
             case R.id.btnSiguiente:
                 usuario.toString();
-                Intent intent = new Intent(this, MapLocationActivity.class);
-                intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
-                startActivity(intent);
+                if (setPhoto){
+                    Intent intent = new Intent(this, MapLocationActivity.class);
+                    intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
+                    startActivity(intent);
+                }else {
+                    alertaNofoto();
+                }
+
                 break;
         }
     }
@@ -117,21 +125,39 @@ public class FotoActivity extends AppCompatActivity {
             Bitmap scaled = Bitmap.createScaledBitmap(bMap, 512, nh, true);
             usuario.setFoto("url foto");
             imgFoto.setImageBitmap(scaled);
+            setPhoto = true;
 
         }else if(requestCode == Constants.codePhoto.GALLERY_REQUEST && resultCode == RESULT_OK) {
 
             Uri selectedImage = data.getData();
             Log.e("uri2", selectedImage.toString());
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                Bitmap bMap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                int nh = (int) ( bMap.getHeight() * (512.0 / bMap.getWidth()) );
+                Bitmap scaled = Bitmap.createScaledBitmap(bMap, 512, nh, true);
                 usuario.setFoto("url foto");
                 Log.e("bit", usuario.getFoto());
-                imgFoto.setImageBitmap(bitmap);
-
+                imgFoto.setImageBitmap(scaled);
+                setPhoto = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void alertaNofoto() {
+
+        final AlertDialog.Builder alertaGPS = new AlertDialog.Builder(this);
+        alertaGPS.setTitle("Advertencia");
+        alertaGPS.setMessage("No has selecionado una foto. Por favor selecciona una.");
+        alertaGPS.setPositiveButton("Entendido", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialogGPS = alertaGPS.create();
+        dialogGPS.show();
     }
 
     public String BitMapToString(Bitmap bitmap) {

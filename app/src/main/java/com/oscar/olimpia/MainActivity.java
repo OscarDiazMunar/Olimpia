@@ -2,7 +2,6 @@ package com.oscar.olimpia;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -121,12 +120,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            startActivity(new Intent(this, FotoActivity.class));
         } else if (id == R.id.nav_gallery) {
-
+            usuario = new Usuario();
+            Intent intent = new Intent(this, MapLocationActivity.class);
+            intent.putExtra(Constants.extraActivity.pojoUsuario, usuario);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-
+            startActivity(new Intent(this, StateWiFiBlueActivity.class));
         } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(this, CargarInfoActivity.class));
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -166,8 +169,8 @@ public class MainActivity extends AppCompatActivity
                     txtCelular.getText().toString(),
                     txtPais.getText().toString(),
                     txtCiudad.getText().toString(),
-                    "hola",
-                    "hola");
+                    "",
+                    "");
 
             Log.e("Objeto", usuario.toString());
             Intent intent = new Intent(this,FotoActivity.class);

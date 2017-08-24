@@ -27,6 +27,9 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
+    public Usuario() {
+    }
+
     public String getNombre() {
         return nombre;
     }
